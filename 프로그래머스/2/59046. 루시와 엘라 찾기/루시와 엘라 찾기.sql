@@ -5,11 +5,6 @@ SEX_UPON_INTAKE
 FROM
 ANIMAL_INS
 WHERE
-NAME = 'Lucy' 
-OR NAME = 'Ella' 
-OR NAME = 'Pickle' 
-OR NAME = 'Rogan' 
-OR NAME = 'Sabrina' 
-OR NAME = 'Mitty'
+NAME IN ('Lucy', 'Ella', 'Pickle', 'Rogan', 'Sabrina', 'Mitty')
 ORDER BY
 ANIMAL_ID
