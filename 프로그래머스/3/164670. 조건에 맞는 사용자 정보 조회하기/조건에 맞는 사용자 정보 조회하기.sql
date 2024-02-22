@@ -1,0 +1,24 @@
+SELECT
+    USER_ID
+    , NICKNAME
+    , CONCAT(USED_GOODS_USER.CITY, " ", USED_GOODS_USER.STREET_ADDRESS1, " ", USED_GOODS_USER.STREET_ADDRESS2) 
+    AS "전체주소"
+    , CONCAT(substr(TLNO,1,3), '-', substr(TLNO,4,4), '-', substr(TLNO,8,4)) AS "전화번호"
+FROM
+    USED_GOODS_USER
+    JOIN
+    (
+        SELECT
+            COUNT(WRITER_ID) AS CNT_WRITER_ID
+            , BOARD_ID
+            , WRITER_ID
+        FROM
+            USED_GOODS_BOARD
+        GROUP BY
+            WRITER_ID
+        HAVING
+            CNT_WRITER_ID >= 3
+    ) AS BOARD
+    ON USED_GOODS_USER.USER_ID = BOARD.WRITER_ID
+ORDER BY
+    USED_GOODS_USER.USER_ID DESC
